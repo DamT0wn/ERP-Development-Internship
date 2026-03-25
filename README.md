@@ -1,17 +1,6 @@
 # ERP-Development-Internship
 ItemProcessor is a small ASP.NET Core MVC app that tracks items, lets you create them, and processes them into child output items. The data is stored in SQL Server using Entity Framework Core, and the item structure supports parent and child relationships so you can see hierarchy in both the list and detail screens.
 
-## Student Submission Checklist
-
-Students must submit the following:
-
-1. GitHub repository link containing the complete source code
-	- Replace this placeholder with your repository URL: `https://github.com/DamT0wn/ERP-Development-Internship`
-2. SQL Server database script
-	- Use: `ItemProcessor/Data/Scripts/CreateItems.sql`
-3. Steps to run the project
-	- See the **Steps to Run the Project** section below.
-
 ## Steps to Run the Project
 
 1. Open a terminal in the `ItemProcessor` folder.
