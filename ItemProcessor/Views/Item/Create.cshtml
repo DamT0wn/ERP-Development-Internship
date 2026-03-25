@@ -1,0 +1,45 @@
+@model ItemProcessor.Models.CreateItemViewModel
+
+@{
+    ViewData["Title"] = "Create Item";
+}
+
+<h2 class="mb-3">Create Item</h2>
+
+@if (TempData["ErrorMessage"] is string error)
+{
+    <div class="alert alert-danger">@error</div>
+}
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Weight" class="form-label"></label>
+        <input asp-for="Weight" class="form-control" />
+        <span asp-validation-for="Weight" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ParentItemId" class="form-label">Parent Item</label>
+        <select asp-for="ParentItemId" asp-items="ViewBag.ParentItems" class="form-select">
+            <option value="">No parent</option>
+        </select>
+        <span asp-validation-for="ParentItemId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

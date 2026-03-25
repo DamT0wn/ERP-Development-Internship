@@ -1,0 +1,78 @@
+@model List<ItemProcessor.Models.ItemTreeRow>
+
+@{
+    ViewData["Title"] = "Items";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Items</h2>
+    <a asp-action="Create" class="btn btn-primary">Create Item</a>
+</div>
+
+@if (TempData["SuccessMessage"] is string success)
+{
+    <div class="alert alert-success">@success</div>
+}
+
+@if (TempData["ErrorMessage"] is string error)
+{
+    <div class="alert alert-danger">@error</div>
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th class="text-end">Weight</th>
+            <th>Status</th>
+            <th>Parent Id</th>
+            <th style="width:220px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="5" class="text-center">No items yet.</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var row in Model)
+            {
+                <tr>
+                    <td>
+                        @for (var i = 0; i < row.Level; i++)
+                        {
+                            <span class="text-muted me-1">--</span>
+                        }
+                        @row.Item.Name
+                    </td>
+                    <td class="text-end">@row.Item.Weight.ToString("0.00")</td>
+                    <td>
+                        @if (row.Item.IsProcessed)
+                        {
+                            <span class="badge bg-success">Processed</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Pending</span>
+                        }
+                    </td>
+                    <td>@(row.Item.ParentItemId?.ToString() ?? "-")</td>
+                    <td>
+                        <a asp-action="Detail" asp-route-id="@row.Item.Id" class="btn btn-sm btn-outline-primary">Detail</a>
+
+                        @if (!row.Item.IsProcessed)
+                        {
+                            <form asp-action="Process" asp-route-id="@row.Item.Id" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-sm btn-success">Process</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

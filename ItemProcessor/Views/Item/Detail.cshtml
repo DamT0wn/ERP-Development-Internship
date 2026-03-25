@@ -1,0 +1,67 @@
+@model ItemProcessor.Models.ItemDetailViewModel
+
+@{
+    ViewData["Title"] = "Item Detail";
+}
+
+<h2 class="mb-3">Item Detail</h2>
+
+@if (TempData["SuccessMessage"] is string success)
+{
+    <div class="alert alert-success">@success</div>
+}
+
+@if (TempData["ErrorMessage"] is string error)
+{
+    <div class="alert alert-danger">@error</div>
+}
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Item.Name</h5>
+        <div><strong>Id:</strong> @Model.Item.Id</div>
+        <div><strong>Weight:</strong> @Model.Item.Weight.ToString("0.00")</div>
+        <div><strong>Status:</strong> @(Model.Item.IsProcessed ? "Processed" : "Pending")</div>
+        <div><strong>Processed At:</strong> @(Model.Item.ProcessedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? "-")</div>
+        <div><strong>Parent Id:</strong> @(Model.Item.ParentItemId?.ToString() ?? "-")</div>
+    </div>
+</div>
+
+<h4>Generated Child Items</h4>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th class="text-end">Weight</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Descendants.Any())
+        {
+            <tr>
+                <td colspan="3" class="text-center">No child items yet.</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var row in Model.Descendants)
+            {
+                <tr>
+                    <td>
+                        @for (var i = 1; i < row.Level; i++)
+                        {
+                            <span class="text-muted me-1">--</span>
+                        }
+                        @row.Item.Name
+                    </td>
+                    <td class="text-end">@row.Item.Weight.ToString("0.00")</td>
+                    <td>@(row.Item.IsProcessed ? "Processed" : "Pending")</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-outline-secondary">Back to list</a>
