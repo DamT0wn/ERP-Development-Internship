@@ -1,0 +1,25 @@
+# Build output
+**/bin/
+**/obj/
+
+# Visual Studio and VS Code
+.vs/
+.vscode/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs and temp
+*.log
+*.tmp
+*.temp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dotnet local tools and packages
+.nuget/
