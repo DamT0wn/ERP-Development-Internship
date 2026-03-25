@@ -6,7 +6,7 @@ ItemProcessor is a small ASP.NET Core MVC app that tracks items, lets you create
 Students must submit the following:
 
 1. GitHub repository link containing the complete source code
-	- Replace this placeholder with your repository URL: `https://github.com/<your-username>/<your-repository>`
+	- Replace this placeholder with your repository URL: `https://github.com/DamT0wn/ERP-Development-Internship`
 2. SQL Server database script
 	- Use: `ItemProcessor/Data/Scripts/CreateItems.sql`
 3. Steps to run the project
