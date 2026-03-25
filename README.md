@@ -1,6 +1,35 @@
 # ERP-Development-Internship
 ItemProcessor is a small ASP.NET Core MVC app that tracks items, lets you create them, and processes them into child output items. The data is stored in SQL Server using Entity Framework Core, and the item structure supports parent and child relationships so you can see hierarchy in both the list and detail screens.
 
+## Student Submission Checklist
+
+Students must submit the following:
+
+1. GitHub repository link containing the complete source code
+	- Replace this placeholder with your repository URL: `https://github.com/<your-username>/<your-repository>`
+2. SQL Server database script
+	- Use: `ItemProcessor/Data/Scripts/CreateItems.sql`
+3. Steps to run the project
+	- See the **Steps to Run the Project** section below.
+
+## Steps to Run the Project
+
+1. Open a terminal in the `ItemProcessor` folder.
+2. Restore and build:
+	```bash
+	dotnet restore
+	dotnet build
+	```
+3. Apply the database migration:
+	```bash
+	dotnet ef database update
+	```
+4. Run the app:
+	```bash
+	dotnet run
+	```
+5. Open the URL shown in the terminal (usually `http://localhost:5074`) and go to `/Item/Index`.
+
 This project is set to .NET 8 and uses SQL Server Express on localhost by default. The connection string is in appsettings.json and currently points to localhost\\SQLEXPRESS with a database name of ItemProcessorDb. If your SQL Server instance name is different, update that connection string before running migrations.
 
 To start from a clean setup, open a terminal in the ItemProcessor folder and run dotnet restore, then dotnet build. After that, run dotnet ef database update to create the database and apply the migration. When that completes, run dotnet run and open the URL shown in the terminal, usually http://localhost:5074.
